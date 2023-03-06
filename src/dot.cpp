@@ -59,7 +59,7 @@ size_t print_node_data(Tree* tree_struct, Node* node_ptr)
         return ERR_TO_OPEN_GRAPH_TXT;
     }
 
-    fprintf(graph_txt, "\tnode_%d[shape = Mrecord, label =\" value = %d \\n right_child = %p \\n left_child = %p\"];", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child);
+    fprintf(graph_txt, "\tnode_%d[shape = Mrecord, label =\" value = %d \\n right_child = %p \\n left_child = %p\"];\n", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child);
 
     if(fclose(graph_txt) == EOF)
     {
@@ -99,4 +99,7 @@ size_t print_node_links(Tree* tree_struct, Node* node_ptr)
     }
 }
 
-
+void create_graph_jpg()
+{
+    system("dot ./graph.txt -Tjpg -o graph.jpg");
+}

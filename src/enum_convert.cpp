@@ -12,6 +12,7 @@ const char* enum_error_string(size_t error_code)
         DEF_ERROR_STRING(ERR_TO_OPEN_GRAPH_TXT)
         DEF_ERROR_STRING(ERR_TO_CLOSE_GRAPH_TXT)
         DEF_ERROR_STRING(ERR_TO_CALLOC_ROOT)
+        DEF_ERROR_STRING(ERR_TO_CALLOC_NODE)
         
         #undef DEF_ERROR_STRING
         default:
