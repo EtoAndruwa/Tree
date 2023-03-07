@@ -97,3 +97,29 @@ size_t add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
         return 0;
     }
 }
+
+// void delete_node()
+// {
+
+
+// }
+
+Node* search_node(Node* node_ptr, Node_data search_value)
+{
+    if(node_ptr->node_value == search_value)
+    {
+        return node_ptr;
+    }
+    else if(node_ptr->node_value > search_value && node_ptr->left_child != nullptr)
+    {
+        search_node(node_ptr->left_child, search_value);
+    }
+    else if(node_ptr->node_value < search_value && node_ptr->right_child != nullptr)
+    {
+        search_node(node_ptr->right_child, search_value);
+    }
+    else    
+    {   
+        return nullptr;
+    }
+}
