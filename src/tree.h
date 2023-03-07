@@ -231,4 +231,6 @@ void print_leaves(Node* node_ptr);
 
 size_t get_depth_tree(Node* node_ptr);
 
+void is_balanced(Node* node_ptr);
+
 #endif

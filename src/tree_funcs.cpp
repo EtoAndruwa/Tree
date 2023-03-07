@@ -186,7 +186,7 @@ size_t get_depth_tree(Node* node_ptr)
 {
     if(node_ptr->left_child == nullptr && node_ptr->right_child == nullptr)
     {
-        return 0;
+        return 1;
     }
     else
     {
@@ -208,3 +208,33 @@ size_t get_depth_tree(Node* node_ptr)
         return ((Depth_right >= Depth_left)? Depth_right: Depth_left);
     }
 }
+
+void is_balanced(Node* node_ptr)
+{
+    int Depth_left_sub_t  = 0;
+    int Depth_right_sub_t = 0;
+
+    if(node_ptr->left_child != nullptr)
+    {
+        Depth_left_sub_t = get_depth_tree(node_ptr->left_child);
+    }
+    if(node_ptr->right_child != nullptr)
+    {
+        Depth_right_sub_t = get_depth_tree(node_ptr->right_child);
+    }
+
+    // printf("Node_ptr: %d\n", node_ptr->node_value);
+    // printf("Depth_left_sub_t: %d\n", Depth_left_sub_t);
+    // printf("Depth_right_sub_t: %d\n", Depth_right_sub_t);
+
+    if((Depth_left_sub_t - Depth_right_sub_t) > 1 || (Depth_right_sub_t - Depth_left_sub_t) > 1)
+    {
+        printf("Disbalanced\n");
+        return;
+    }
+    else
+    {
+        printf("Balanced\n");
+    }
+}
+
