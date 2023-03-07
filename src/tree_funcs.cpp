@@ -56,5 +56,29 @@ Node* create_node(Tree* tree_ptr, Node_data node_value)
     return new_node_ptr;
 }
 
+void link_node_left(Node* parent_ptr, Node* child_ptr)
+{
+    parent_ptr->left_child = child_ptr;
+}
+
+void link_node_right(Node* parent_ptr, Node* child_ptr)
+{
+    parent_ptr->right_child = child_ptr;
+}
+
+// size_t delete_left_child(Node* child_ptr)
+// {
+
+
+
+// }
+
+// size_t delete_right_child()
+// {
+
+
+
+
+// }
 
 

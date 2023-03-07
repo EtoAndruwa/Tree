@@ -36,15 +36,15 @@ const Node_data POISON = 0xDED;
 size_t tree_ctor(Tree* tree_ptr);
 void tree_dtor(Tree* tree_ptr);
 void dtor_childs(Node* node_ptr);
-size_t link_node_left();
-size_t link_node_right();
+void link_node_left(Node* parent_ptr, Node* child_ptr);
+void link_node_right(Node* parent_ptr, Node* child_ptr);
 Node* create_node(Tree* tree_ptr, Node_data node_value);
 size_t delete_node();
 const char* enum_error_string(size_t error_code);
 size_t graph_start(Tree* tree_struct);
 size_t print_node_data(Tree* tree_struct, Node* node_ptr);
 size_t print_node_links(Tree* tree_struct, Node* node_ptr);
-void create_graph_jpg();
+void create_graph_jpg(Tree* tree_ptr);
 
 size_t graph_end(Tree* tree_struct);
 
