@@ -165,4 +165,21 @@ void print_sorted_array(Node* node_ptr)
     }
 }
 
+void print_leaves(Node* node_ptr)
+{
+    if(node_ptr->left_child == nullptr && node_ptr->right_child == nullptr)
+    {
+        printf("%d ", node_ptr->node_value);
+        return;
+    }
+    if(node_ptr->left_child != nullptr)
+    {
+        print_leaves(node_ptr->left_child);
+    }
+    if(node_ptr->right_child != nullptr)
+    {
+        print_leaves(node_ptr->right_child);
+    }
+}
+
 

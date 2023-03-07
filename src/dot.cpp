@@ -124,17 +124,17 @@ size_t create_graph_jpg(Tree* tree_ptr, const char* file_name)
     if(strcmp(file_name, graph_before_txt_name) == 0)
     {
         system("dot ./graph_before.txt -Tjpg -o graph_before.jpg");
-        system("explorer.exe graph_before.jpg");
+        // system("explorer.exe graph_before.jpg");
     }
     else if(strcmp(file_name, graph_after_txt_name) == 0)
     {
         system("dot ./graph_after.txt -Tjpg -o graph_after.jpg");
-        system("explorer.exe graph_after.jpg");
+        // system("explorer.exe graph_after.jpg");
     }
     else
     {
         system("dot ./graph.txt -Tjpg -o graph.jpg");
-        system("explorer.exe graph.jpg");
+        // system("explorer.exe graph.jpg");
     }
 }
 

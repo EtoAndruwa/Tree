@@ -12,13 +12,12 @@ int main()
     add_node_to_tree(&tree_ptr, tree_ptr.root, 11);
     add_node_to_tree(&tree_ptr, tree_ptr.root, 15);
     add_node_to_tree(&tree_ptr, tree_ptr.root, 0);
-    add_node_to_tree(&tree_ptr, tree_ptr.root, 2);
 
     create_graph_jpg(&tree_ptr, graph_before_txt_name);
-    delete_node( tree_ptr.root, 2);
     create_graph_jpg(&tree_ptr, graph_after_txt_name);
 
-    print_sorted_array(tree_ptr.root);
+    // print_sorted_array(tree_ptr.root);
+    print_leaves(tree_ptr.root);
 
     create_graph_jpg(&tree_ptr, graph_txt_name);
 
