@@ -49,6 +49,7 @@ enum error_codes
 typedef struct Node
 {
     Node_data node_value = 0;
+    Node* parent_node = nullptr;
     Node* left_child = nullptr;
     Node* right_child = nullptr;
 }Node;
@@ -208,5 +209,11 @@ size_t add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value);
  */
 Node* search_node(Node* node_ptr, Node_data search_value);
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ */
+void delete_node(Node* node_ptr, Node_data search_value);
 
 #endif

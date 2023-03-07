@@ -55,7 +55,14 @@ size_t print_node_data(Tree* tree_struct, Node* node_ptr)
 
     if(node_ptr != nullptr)
     {
-        fprintf(graph_txt, "\tnode_%d[shape = record, label =\" value = %d \\n | { right_child = %p \\n} | { left_child = %p }\"];\n", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child);
+        if(node_ptr->parent_node == nullptr)
+        {
+            fprintf(graph_txt, "\tnode_%d[shape = record, label =\" value = %d \\n | { right_child = %p \\n} | { left_child = %p } | { parent = %p }\", style=\"filled\", fillcolor=\"lightgrey\"];\n", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child, node_ptr->parent_node);
+        }
+        else
+        {
+            fprintf(graph_txt, "\tnode_%d[shape = record, label =\" value = %d \\n | { right_child = %p \\n} | { left_child = %p } | { parent = %p }\"];\n", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child, node_ptr->parent_node);
+        }
         if(node_ptr->left_child != nullptr)
         {
             print_node_data(tree_struct, node_ptr->left_child);
@@ -94,6 +101,10 @@ size_t print_node_links(Tree* tree_struct, Node* node_ptr)
         fprintf(graph_txt, "\tnode_%d -> node_%d[color=\"red\", label = \"right_child\"];\n", node_ptr->node_value, node_ptr->right_child->node_value);
         print_node_links(tree_struct, node_ptr->right_child);
     }
+    // if(node_ptr->parent_node != nullptr)
+    // {
+    //     fprintf(graph_txt, "\tnode_%d -> node_%d[color=\"green\", label = \"parent\"];\n", node_ptr->node_value, node_ptr->parent_node->node_value);
+    // }
 
     if(fclose(graph_txt) == EOF)
     {
