@@ -6,8 +6,7 @@ size_t graph_start(Tree* tree_struct)
     if(graph_txt == nullptr)
     {
         tree_struct->error_code = ERR_TO_OPEN_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_OPEN_GRAPH_TXT;
     }
 
@@ -19,8 +18,7 @@ size_t graph_start(Tree* tree_struct)
     if(fclose(graph_txt) == EOF)
     {
         tree_struct->error_code = ERR_TO_CLOSE_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_CLOSE_GRAPH_TXT;
     }
 }
@@ -31,8 +29,7 @@ size_t graph_end(Tree* tree_struct)
     if(graph_txt == nullptr)
     {
         tree_struct->error_code = ERR_TO_OPEN_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_OPEN_GRAPH_TXT;
     }
 
@@ -41,8 +38,7 @@ size_t graph_end(Tree* tree_struct)
     if(fclose(graph_txt) == EOF)
     {
         tree_struct->error_code = ERR_TO_CLOSE_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_CLOSE_GRAPH_TXT;
     }
 }
@@ -53,8 +49,7 @@ size_t print_node_data(Tree* tree_struct, Node* node_ptr)
     if(graph_txt == nullptr)
     {
         tree_struct->error_code = ERR_TO_OPEN_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_OPEN_GRAPH_TXT;
     }
 
@@ -74,8 +69,7 @@ size_t print_node_data(Tree* tree_struct, Node* node_ptr)
     if(fclose(graph_txt) == EOF)
     {
         tree_struct->error_code = ERR_TO_CLOSE_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_CLOSE_GRAPH_TXT;
     }
 }
@@ -86,8 +80,7 @@ size_t print_node_links(Tree* tree_struct, Node* node_ptr)
     if(graph_txt == nullptr)
     {
         tree_struct->error_code = ERR_TO_OPEN_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_OPEN_GRAPH_TXT;
     }
 
@@ -105,13 +98,12 @@ size_t print_node_links(Tree* tree_struct, Node* node_ptr)
     if(fclose(graph_txt) == EOF)
     {
         tree_struct->error_code = ERR_TO_CLOSE_GRAPH_TXT;
-        // tree_dump(tree_struct);
-        // tree_dtor(tree_struct);
+        tree_dtor(tree_struct);
         return ERR_TO_CLOSE_GRAPH_TXT;
     }
 }
 
-void create_graph_jpg(Tree* tree_ptr)
+size_t create_graph_jpg(Tree* tree_ptr)
 {
     graph_start(tree_ptr);
     print_node_data(tree_ptr, tree_ptr->root);

@@ -1,13 +1,32 @@
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #ifndef TREE_H
 #define TREE_h
 
+/**
+ * @file tree.h
+ * @author EtoAndruwa (https://github.com/EtoAndruwa)
+ * @brief 
+ * @version v1.0
+ * @date 2023-03-07
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 static const char* graph_txt_name = "graph.txt";
-
 typedef int Node_data; 
+const Node_data POISON = 0xDED;
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ */
 enum error_codes
 {
     TREE_OK                = 0,
@@ -17,6 +36,12 @@ enum error_codes
     ERR_TO_CALLOC_NODE     = 4,
 };
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief The struct of the node 
+ * 
+ */
 typedef struct Node
 {
     Node_data node_value = 0;
@@ -24,28 +49,146 @@ typedef struct Node
     Node* right_child = nullptr;
 }Node;
 
+/**
+ * @brief This struct contains error code of the tree and the pointer to the tree's node
+ * 
+ */
 typedef struct Tree
 {
     Node* root = nullptr;
     size_t error_code = TREE_OK;
 }Tree;
 
-const Node_data POISON = 0xDED;
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-
+/**
+ * @brief 
+ * 
+ * @param tree_ptr 
+ * @return size_t Returns the error code of the function
+ */
 size_t tree_ctor(Tree* tree_ptr);
-void tree_dtor(Tree* tree_ptr);
-void dtor_childs(Node* node_ptr);
-void link_node_left(Node* parent_ptr, Node* child_ptr);
-void link_node_right(Node* parent_ptr, Node* child_ptr);
-Node* create_node(Tree* tree_ptr, Node_data node_value);
-size_t delete_node();
-const char* enum_error_string(size_t error_code);
-size_t graph_start(Tree* tree_struct);
-size_t print_node_data(Tree* tree_struct, Node* node_ptr);
-size_t print_node_links(Tree* tree_struct, Node* node_ptr);
-void create_graph_jpg(Tree* tree_ptr);
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param tree_ptr 
+ */
+void tree_dtor(Tree* tree_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param node_ptr 
+ */
+void dtor_childs(Node* node_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param parent_ptr 
+ * @param child_ptr 
+ */
+void link_node_left(Node* parent_ptr, Node* child_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param parent_ptr 
+ * @param child_ptr 
+ */
+void link_node_right(Node* parent_ptr, Node* child_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief Create a node object
+ * 
+ * @param tree_ptr 
+ * @param node_value 
+ * @return Node* 
+ */
+Node* create_node(Tree* tree_ptr, Node_data node_value);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param error_code 
+ * @return const char* 
+ */
+const char* enum_error_string(size_t error_code);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param tree_struct 
+ * @return size_t 
+ */
+size_t graph_start(Tree* tree_struct);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/**
+ * @brief 
+ * 
+ * @param tree_struct 
+ * @param node_ptr 
+ * @return size_t 
+ */
+size_t print_node_data(Tree* tree_struct, Node* node_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param tree_struct 
+ * @param node_ptr 
+ * @return size_t 
+ */
+size_t print_node_links(Tree* tree_struct, Node* node_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief Create a graph jpg object
+ * 
+ * @param tree_ptr 
+ * @return size_t 
+ */
+size_t create_graph_jpg(Tree* tree_ptr);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ * @param tree_struct 
+ * @return size_t 
+ */
 size_t graph_end(Tree* tree_struct);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief 
+ * 
+ */
+void add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 #endif
