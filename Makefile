@@ -17,7 +17,7 @@ PREF_SRC = ./src/
 SRC = $(wildcard $(PREF_SRC)*.cpp)
 OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))
 
-all : $(TARGET) clean_graph run_program   
+all : $(TARGET) clean_graph_only run_program   
 
 $(TARGET) : $(OBJ) 
 	$(CC) $(OBJ) -o $(TARGET).exe
@@ -31,5 +31,8 @@ run_program :
 clean : 
 	rm $(TARGET).exe $(PREF_OBJ)*.o valgrind_log.txt
 
-clean_graph :
+clean_graph_action :
 	rm graph.txt graph.jpg graph_after.txt graph_before.txt graph_after.jpg graph_before.jpg
+
+clean_graph_only :
+	rm graph.txt graph.jpg

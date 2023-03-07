@@ -182,4 +182,29 @@ void print_leaves(Node* node_ptr)
     }
 }
 
+size_t get_depth_tree(Node* node_ptr)
+{
+    if(node_ptr->left_child == nullptr && node_ptr->right_child == nullptr)
+    {
+        return 0;
+    }
+    else
+    {
+        size_t Depth_left = 0;
+        size_t Depth_right = 0;
 
+        if(node_ptr->left_child != nullptr)
+        {
+            Depth_left = get_depth_tree(node_ptr->left_child);    
+        }
+        Depth_left++;
+
+        if(node_ptr->right_child != nullptr)
+        {
+            Depth_right = get_depth_tree(node_ptr->right_child); 
+        }
+        Depth_right++;
+
+        return ((Depth_right >= Depth_left)? Depth_right: Depth_left);
+    }
+}

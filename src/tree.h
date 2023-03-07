@@ -229,4 +229,6 @@ void print_sorted_array(Node* node_ptr);
 
 void print_leaves(Node* node_ptr);
 
+size_t get_depth_tree(Node* node_ptr);
+
 #endif

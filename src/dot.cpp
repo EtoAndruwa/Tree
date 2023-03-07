@@ -57,11 +57,11 @@ size_t print_node_data(Tree* tree_struct, Node* node_ptr, const char* file_name)
     {
         if(node_ptr->parent_node == nullptr)
         {
-            fprintf(graph_txt, "\tnode_%d[shape = record, label =\" value = %d \\n | { right_child = %p \\n} | { left_child = %p } | { parent = %p }\", style=\"filled\", fillcolor=\"lightgrey\"];\n", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child, node_ptr->parent_node);
+            fprintf(graph_txt, "\tnode_%d[shape = record, label =\" { <f0> left_child = %p } | { <here> value = %d \\n | parent = %p } | { <f1> right_child = %p } \", style=\"filled\", fillcolor=\"lightgrey\"];\n", node_ptr->node_value, node_ptr->left_child, node_ptr->node_value, node_ptr->parent_node, node_ptr->right_child);
         }
         else
         {
-            fprintf(graph_txt, "\tnode_%d[shape = record, label =\" value = %d \\n | { right_child = %p \\n} | { left_child = %p } | { parent = %p }\"];\n", node_ptr->node_value, node_ptr->node_value, node_ptr->right_child, node_ptr->left_child, node_ptr->parent_node);
+            fprintf(graph_txt, "\tnode_%d[shape = record, label =\" { <f0> left_child = %p } | { <here> value = %d \\n | parent = %p } | { <f1> right_child = %p } \"];\n", node_ptr->node_value, node_ptr->left_child, node_ptr->node_value, node_ptr->parent_node, node_ptr->right_child);
         }
         if(node_ptr->left_child != nullptr)
         {
@@ -93,12 +93,12 @@ size_t print_node_links(Tree* tree_struct, Node* node_ptr, const char* file_name
 
     if(node_ptr->left_child != nullptr)
     {
-        fprintf(graph_txt, "\tnode_%d -> node_%d[color=\"blue\", label = \"left_child\"];\n", node_ptr->node_value, node_ptr->left_child->node_value);
+        fprintf(graph_txt, "\tnode_%d:f0 -> node_%d:here[color=\"blue\", label = \"left_child\"];\n", node_ptr->node_value, node_ptr->left_child->node_value);
         print_node_links(tree_struct, node_ptr->left_child, file_name);
     }
     if(node_ptr->right_child != nullptr)
     {
-        fprintf(graph_txt, "\tnode_%d -> node_%d[color=\"red\", label = \"right_child\"];\n", node_ptr->node_value, node_ptr->right_child->node_value);
+        fprintf(graph_txt, "\tnode_%d:f1 -> node_%d:here[color=\"red\", label = \"right_child\"];\n", node_ptr->node_value, node_ptr->right_child->node_value);
         print_node_links(tree_struct, node_ptr->right_child, file_name);
     }
     // if(node_ptr->parent_node != nullptr)
@@ -134,7 +134,7 @@ size_t create_graph_jpg(Tree* tree_ptr, const char* file_name)
     else
     {
         system("dot ./graph.txt -Tjpg -o graph.jpg");
-        // system("explorer.exe graph.jpg");
+        system("explorer.exe graph.jpg");
     }
 }
 
