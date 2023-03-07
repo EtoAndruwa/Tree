@@ -3,14 +3,14 @@
 int main()
 {   
     Tree tree_ptr = {};
-    tree_ctor(&tree_ptr);
 
-    tree_ptr.root = create_node(&tree_ptr, 7);
-    add_node_to_tree(&tree_ptr, tree_ptr.root, 2);
-    add_node_to_tree(&tree_ptr, tree_ptr.root, 9);
-    add_node_to_tree(&tree_ptr, tree_ptr.root, 8);
-    add_node_to_tree(&tree_ptr, tree_ptr.root, 3);
+    tree_ctor(&tree_ptr, 10);
+
     add_node_to_tree(&tree_ptr, tree_ptr.root, 1);
+    add_node_to_tree(&tree_ptr, tree_ptr.root, 11);
+    add_node_to_tree(&tree_ptr, tree_ptr.root, 15);
+    add_node_to_tree(&tree_ptr, tree_ptr.root, 0);
+    add_node_to_tree(&tree_ptr, tree_ptr.root, 2);
 
     create_graph_jpg(&tree_ptr);
 
@@ -18,4 +18,3 @@ int main()
 
     return 0;
 }
-

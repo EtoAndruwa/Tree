@@ -1,6 +1,7 @@
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #ifndef TREE_H
 #define TREE_h
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
  * @file tree.h
@@ -12,14 +13,17 @@
  * @copyright Copyright (c) 2023
  * 
  */
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-static const char* graph_txt_name = "graph.txt";
-typedef int Node_data; 
-const Node_data POISON = 0xDED;
+static const char* graph_txt_name = "graph.txt"; /// \brief The name of the file containing structure of the graph
+typedef int Node_data;                           /// \brief The type of the node's value
+const Node_data POISON = 0xDED;                  /// \brief The Poison value which is used in order to delete node's values  
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -62,132 +66,136 @@ typedef struct Tree
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Creates and initializes the tree struct
  * 
- * @param tree_ptr 
+ * @param tree_ptr The pointer to the tree struct
+ * @param root_value The value of the root node
  * @return size_t Returns the error code of the function
  */
-size_t tree_ctor(Tree* tree_ptr);
+size_t tree_ctor(Tree* tree_ptr, Node_data root_value);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Deletes the tree struct and calls the dtor_childs function to delete all child nodes recursively
  * 
- * @param tree_ptr 
+ * @param tree_ptr The pointer to the tree struct
  */
 void tree_dtor(Tree* tree_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Deletes all children nodes of the tree
  * 
- * @param node_ptr 
+ * @param node_ptr The pointer to the root node
  */
 void dtor_childs(Node* node_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Sets child_ptr as left child of the parent_ptr
  * 
- * @param parent_ptr 
- * @param child_ptr 
+ * @param parent_ptr The pointer to the parent node
+ * @param child_ptr  The pointer to the child node
  */
 void link_node_left(Node* parent_ptr, Node* child_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Sets child_ptr as right child of the parent_ptr
  * 
- * @param parent_ptr 
- * @param child_ptr 
+ * @param parent_ptr The pointer to the parent node
+ * @param child_ptr  The pointer to the child node
  */
 void link_node_right(Node* parent_ptr, Node* child_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief Create a node object
+ * @brief Creates the new node with given value 
  * 
- * @param tree_ptr 
- * @param node_value 
- * @return Node* 
+ * @param tree_ptr The pointer to the tree struct
+ * @param node_value The value of the node 
+ * @return Node* The pointer to the created node
  */
 Node* create_node(Tree* tree_ptr, Node_data node_value);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Convert the enum code to the string equivalent 
  * 
- * @param error_code 
- * @return const char* 
+ * @param error_code The enum code of the error
+ * @return const char* The string equivalent of the error code 
  */
 const char* enum_error_string(size_t error_code);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Prints the start of the graph into the description file
  * 
- * @param tree_struct 
- * @return size_t 
+ * @param tree_ptr The pointer to the tree struct
+ * @return size_t Returns the error code of the funciton
  */
-size_t graph_start(Tree* tree_struct);
+size_t graph_start(Tree* tree_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /**
- * @brief 
+ * @brief Prints all data about the given node into the description file 
  * 
- * @param tree_struct 
- * @param node_ptr 
- * @return size_t 
+ * @param tree_ptr The pointer to the tree struct
+ * @param node_ptr The pointer to the node that must be described
+ * @return size_t Returns the error code of the funciton
  */
-size_t print_node_data(Tree* tree_struct, Node* node_ptr);
+size_t print_node_data(Tree* tree_ptr, Node* node_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Prints the links of current node with its children
  * 
- * @param tree_struct 
- * @param node_ptr 
- * @return size_t 
+ * @param tree_ptr The pointer to the tree struct
+ * @param node_ptr The pointer to the node that must be described
+ * @return size_t Returns the error code of the funciton
  */
-size_t print_node_links(Tree* tree_struct, Node* node_ptr);
+size_t print_node_links(Tree* tree_ptr, Node* node_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief Create a graph jpg object
+ * @brief Calls all functions that create the structure of the graph in the description file
  * 
- * @param tree_ptr 
- * @return size_t 
+ * @param tree_ptr The pointer to the tree struct
+ * @return size_t Returns the error code of the funciton
  */
 size_t create_graph_jpg(Tree* tree_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief 
+ * @brief Closes the struct of the graph in the file
  * 
- * @param tree_struct 
- * @return size_t 
+ * @param tree_ptr The pointer to the tree struct
+ * @return size_t Returns the error code of the funciton
  */
-size_t graph_end(Tree* tree_struct);
+size_t graph_end(Tree* tree_ptr);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 /**
- * @brief 
+ * @brief Recursively checks all nodes in order to add new nodes as in binary search tree 
  * 
+ * @param tree_ptr The pointer to the tree struct
+ * @param node_ptr The pointer to the node to which new node must be added
+ * @param node_value The value of the new node
+ * @return size_t Returns the error code of the tree struct 
  */
-void add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value);
+size_t add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 

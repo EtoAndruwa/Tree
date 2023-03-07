@@ -19,4 +19,3 @@ const char* enum_error_string(size_t error_code)
             return "NEW_ERROR_CODE";
     }
 }
-

@@ -1,8 +1,8 @@
 #include "tree.h"
 
-size_t tree_ctor(Tree* tree_ptr)
+size_t tree_ctor(Tree* tree_ptr, Node_data root_value)
 {
-    tree_ptr->root = (Node*)calloc(1, sizeof(Node));
+    tree_ptr->root = create_node(tree_ptr, root_value);
 
     if(tree_ptr->root == nullptr)
     {
@@ -18,8 +18,6 @@ void tree_dtor(Tree* tree_ptr)
     dtor_childs(tree_ptr->root);
 
     tree_ptr->error_code = TREE_OK;
-
-    free(tree_ptr);
 }
 
 void dtor_childs(Node* node_ptr)
@@ -66,11 +64,15 @@ void link_node_right(Node* parent_ptr, Node* child_ptr)
     parent_ptr->right_child = child_ptr;
 }
 
-void add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
+size_t add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
 {
     if((node_ptr->node_value > node_value) && (node_ptr->left_child == nullptr))
     {
         Node* new_node_ptr = create_node(tree_ptr, node_value);
+        if(tree_ptr->error_code != TREE_OK)
+        {
+            return tree_ptr->error_code;
+        }
         link_node_left(node_ptr, new_node_ptr); 
     }
     else if((node_ptr->node_value > node_value) && (node_ptr->left_child != nullptr))
@@ -80,6 +82,10 @@ void add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
     else if((node_ptr->node_value < node_value) && (node_ptr->right_child == nullptr))
     {
         Node* new_node_ptr = create_node(tree_ptr, node_value);
+        if(tree_ptr->error_code != TREE_OK)
+        {
+            return tree_ptr->error_code;
+        }
         link_node_right(node_ptr, new_node_ptr); 
     }
     else if((node_ptr->node_value < node_value) && (node_ptr->right_child != nullptr))
@@ -88,7 +94,6 @@ void add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
     }
     else    
     {
-        return;
+        return 0;
     }
 }
-
