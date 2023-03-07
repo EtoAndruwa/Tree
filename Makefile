@@ -32,4 +32,4 @@ clean :
 	rm $(TARGET).exe $(PREF_OBJ)*.o valgrind_log.txt
 
 clean_graph :
-	rm graph.txt graph.jpg
+	rm graph.txt graph.jpg graph_after.txt graph_before.txt graph_after.jpg graph_before.jpg

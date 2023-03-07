@@ -101,6 +101,7 @@ size_t add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
 
 void delete_node(Node* node_ptr, Node_data search_value)
 {
+
     Node* node_delte_ptr = search_node(node_ptr, search_value);
 
     if(node_delte_ptr == nullptr)
@@ -145,3 +146,23 @@ Node* search_node(Node* node_ptr, Node_data search_value)
         return nullptr;
     }
 }
+
+void print_sorted_array(Node* node_ptr)
+{
+    if(node_ptr->left_child == nullptr && node_ptr->right_child == nullptr)
+    {
+        printf("%d ", node_ptr->node_value);
+        return;
+    }
+    if(node_ptr->left_child != nullptr)
+    {
+        print_sorted_array(node_ptr->left_child);
+    }
+    printf("%d ", node_ptr->node_value);
+    if(node_ptr->right_child != nullptr)
+    {
+        print_sorted_array(node_ptr->right_child);
+    }
+}
+
+

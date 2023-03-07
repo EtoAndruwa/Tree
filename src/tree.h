@@ -11,19 +11,21 @@
  * @date 2023-03-07
  * 
  * @copyright Copyright (c) 2023
- * 
  */
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-static const char* graph_txt_name = "graph.txt"; /// \brief The name of the file containing structure of the graph
-typedef int Node_data;                           /// \brief The type of the node's value
-const Node_data POISON = 0xDED;                  /// \brief The Poison value which is used in order to delete node's values  
+static const char* graph_txt_name = "graph.txt";               /// \brief The name of the file containing structure of the graph
+static const char* graph_after_txt_name  = "graph_after.txt";  /// \brief The name of the file containing structure of the graph
+static const char* graph_before_txt_name = "graph_before.txt"; /// \brief The name of the file containing structure of the graph
+typedef int Node_data;                                         /// \brief The type of the node's value
+const Node_data POISON = 0xDED;                                /// \brief The Poison value which is used in order to delete node's values  
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -140,9 +142,10 @@ const char* enum_error_string(size_t error_code);
  * @brief Prints the start of the graph into the description file
  * 
  * @param tree_ptr The pointer to the tree struct
+ * @param file_name 
  * @return size_t Returns the error code of the funciton
  */
-size_t graph_start(Tree* tree_ptr);
+size_t graph_start(Tree* tree_ptr, const char* file_name);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -152,9 +155,10 @@ size_t graph_start(Tree* tree_ptr);
  * 
  * @param tree_ptr The pointer to the tree struct
  * @param node_ptr The pointer to the node that must be described
+ * @param file_name 
  * @return size_t Returns the error code of the funciton
  */
-size_t print_node_data(Tree* tree_ptr, Node* node_ptr);
+size_t print_node_data(Tree* tree_ptr, Node* node_ptr, const char* file_name);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -163,9 +167,10 @@ size_t print_node_data(Tree* tree_ptr, Node* node_ptr);
  * 
  * @param tree_ptr The pointer to the tree struct
  * @param node_ptr The pointer to the node that must be described
+ * @param file_name 
  * @return size_t Returns the error code of the funciton
  */
-size_t print_node_links(Tree* tree_ptr, Node* node_ptr);
+size_t print_node_links(Tree* tree_ptr, Node* node_ptr, const char* file_name);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -173,9 +178,10 @@ size_t print_node_links(Tree* tree_ptr, Node* node_ptr);
  * @brief Calls all functions that create the structure of the graph in the description file
  * 
  * @param tree_ptr The pointer to the tree struct
+ * @param file_name 
  * @return size_t Returns the error code of the funciton
  */
-size_t create_graph_jpg(Tree* tree_ptr);
+size_t create_graph_jpg(Tree* tree_ptr, const char* file_name);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -183,9 +189,10 @@ size_t create_graph_jpg(Tree* tree_ptr);
  * @brief Closes the struct of the graph in the file
  * 
  * @param tree_ptr The pointer to the tree struct
+ * @param file_name 
  * @return size_t Returns the error code of the funciton
  */
-size_t graph_end(Tree* tree_ptr);
+size_t graph_end(Tree* tree_ptr, const char* file_name);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /**
@@ -215,5 +222,10 @@ Node* search_node(Node* node_ptr, Node_data search_value);
  * 
  */
 void delete_node(Node* node_ptr, Node_data search_value);
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+void print_sorted_array(Node* node_ptr);
+
 
 #endif
