@@ -99,30 +99,71 @@ size_t add_node_to_tree(Tree* tree_ptr, Node* node_ptr, Node_data node_value)
     }
 }
 
-void delete_node(Node* node_ptr, Node_data search_value)
+Node* delete_node(Node* deleted_node, Node* replacing_node)
 {
-
-    Node* node_delte_ptr = search_node(node_ptr, search_value);
-
-    if(node_delte_ptr == nullptr)
+    if(deleted_node == nullptr)
     {
-        return;
+        return nullptr;
     }
     else
     {
-        if(node_delte_ptr->left_child == nullptr && node_delte_ptr->right_child == nullptr)
+        if(replacing_node->left_child == nullptr && replacing_node->right_child == nullptr)
+        {   
+            if(replacing_node->parent_node->left_child == replacing_node)
+            {
+                replacing_node->parent_node->left_child = nullptr;
+            }
+            else 
+            {
+                replacing_node->parent_node->right_child = nullptr;
+            }
+
+            return replacing_node;          
+        }
+
+        if(replacing_node->left_child != nullptr && replacing_node->right_child != nullptr)
         {
-            node_delte_ptr->node_value = POISON;
-            if(node_delte_ptr->parent_node->left_child->node_value == node_delte_ptr->node_value)
+            Node* new_node = search_left(replacing_node->right_child);
+
+            if(new_node->parent_node->left_child == new_node)
             {
-                node_delte_ptr->parent_node->left_child = nullptr;
+                new_node->parent_node->left_child = nullptr;
             }
-            else
+            else 
             {
-                node_delte_ptr->parent_node->right_child = nullptr;
+                new_node->parent_node->right_child = nullptr;
             }
-            free(node_delte_ptr);
-            node_delte_ptr = nullptr;
+
+            if(deleted_node->parent_node->left_child == deleted_node)
+            {
+                deleted_node->parent_node->left_child = new_node;
+            }
+            else 
+            {
+                deleted_node->parent_node->right_child = new_node;
+            }
+
+            if(deleted_node->right_child != new_node)
+            {
+                new_node->right_child = deleted_node->right_child;
+            }
+            if(deleted_node->left_child != new_node)
+            {
+                new_node->left_child = deleted_node->left_child;
+            }
+
+            deleted_node->node_value = POISON;
+            free(deleted_node);
+        }
+        if(replacing_node->left_child != nullptr && replacing_node->right_child == nullptr)
+        {
+            Node* new_left_node = delete_node(deleted_node, replacing_node->left_child);
+            return new_left_node;
+        }
+        if(replacing_node->left_child == nullptr && replacing_node->right_child != nullptr)
+        {
+            Node* new_right_node = delete_node(deleted_node, replacing_node->right_child);
+            return new_right_node;
         }
     }
 }
@@ -235,6 +276,33 @@ void is_balanced(Node* node_ptr)
     else
     {
         printf("Balanced\n");
+    }
+}
+
+void search_and_delete_node(Node* root_node, Node_data node_value)
+{
+    Node* node_delete_ptr = search_node(root_node, node_value);
+    Node* replacing_node = delete_node(node_delete_ptr, node_delete_ptr);
+
+}
+
+Node* search_left(Node* node_ptr)
+{
+    if(node_ptr->left_child == nullptr && node_ptr->right_child == nullptr)
+    {
+        return node_ptr;
+    }
+    else if(node_ptr->left_child != nullptr && node_ptr->right_child != nullptr)
+    {
+        search_left(node_ptr->left_child);
+    }
+    else if(node_ptr->left_child != nullptr && node_ptr->right_child == nullptr)
+    {
+        search_left(node_ptr->left_child);
+    }
+    else if(node_ptr->left_child == nullptr && node_ptr->right_child != nullptr)
+    {
+        search_left(node_ptr->right_child);
     }
 }
 

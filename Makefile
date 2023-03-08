@@ -17,7 +17,7 @@ PREF_SRC = ./src/
 SRC = $(wildcard $(PREF_SRC)*.cpp)
 OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))
 
-all : $(TARGET) clean_graph_only run_program   
+all : $(TARGET) clean_graph_action run_program open
 
 $(TARGET) : $(OBJ) 
 	$(CC) $(OBJ) -o $(TARGET).exe
@@ -36,3 +36,6 @@ clean_graph_action :
 
 clean_graph_only :
 	rm graph.txt graph.jpg
+
+open:
+	code *.jpg

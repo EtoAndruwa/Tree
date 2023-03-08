@@ -149,7 +149,6 @@ size_t graph_start(Tree* tree_ptr, const char* file_name);
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-
 /**
  * @brief Prints all data about the given node into the description file 
  * 
@@ -232,5 +231,12 @@ void print_leaves(Node* node_ptr);
 size_t get_depth_tree(Node* node_ptr);
 
 void is_balanced(Node* node_ptr);
+
+Node* delete_node(Node* deleted_node, Node* replacing_node);
+
+void search_and_delete_node(Node* root_node, Node_data node_value);
+
+Node* search_left(Node* node_ptr);
+
 
 #endif

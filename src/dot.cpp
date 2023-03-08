@@ -134,7 +134,7 @@ size_t create_graph_jpg(Tree* tree_ptr, const char* file_name)
     else
     {
         system("dot ./graph.txt -Tjpg -o graph.jpg");
-        system("explorer.exe graph.jpg");
+        // system("explorer.exe graph.jpg");
     }
 }
 
